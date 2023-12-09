@@ -1,17 +1,25 @@
-<header>
-  <% @books.each do |book| %>
-    <%= link_to book_path(book.id) do %>
-      <%= image_tag book.get_image %>
-    <% end %>
-  <% end %>
-</header>
-
+Books
 <h1>User info</h1>
+<table>
+  <tr>
+    <td><%= image_tag @user.get_profile_image(100, 100) %></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><b>name</b></td>
+    <td><b><%= @user.name %></b></td>
+  </tr>
+  <tr>
+    <td><b>introduction</b></td>
+    <td><b><%= @user.introduction %></b></td>
+  </tr>
+</table>
+
+<% if @user == current_user %>
+  <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
+<% end %>
+
 <% @books.each do |book| %>
-  <div>
-    <%= image_tag book.user.get_profile_image(100, 100) %>
-    <p>name：<%= book.user.name %></p>
-  </div>
 
   <div>
     <p><%= image_tag book.get_image %></p>  
@@ -25,7 +33,7 @@
 <% end %>
 
 <h1>画像投稿フォーム</h1>
-<%= form_with model: @book do |f| %>
+<%= form_for @book, url: books_path, method: :post do |f| %>
   <h4>画像</h4>
   <%= f.file_field :image, accept: "image/*" %>
   <h4>ショップ名</h4>

@@ -4,8 +4,10 @@
 <h2>本文</h2>
 <p><%= @book.body %></p>
 
- <p>投稿ユーザー画像：<%= image_tag @post_image.user.get_profile_image(100,100) %></p>
+<p>投稿ユーザー画像：<%= image_tag @book.user.get_profile_image(100,100) %></p>
+
   
    <% if @book.user == current_user %>
     <%= link_to "削除", book_path(@book), method: :delete %>
   <% end %>
+  :イ：qg4ぴg：q3p4h」ghq3p」
