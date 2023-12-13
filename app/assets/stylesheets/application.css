@@ -1,3 +1,5 @@
+
+
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -13,3 +15,19 @@
  *= require_tree .
  *= require_self
  */
+body{width: 100%;}
+.container {margin-top: 30px;}
+
+
+
+.row {margin-top: 30px;}
+
+.col-md-3 {margin-top: 30px;}
+
+.offset-md-1 { margin-left: 10px;}
+
+.col-md-8 {margin-top: 30px;}
+
+.column {
+    border-bottom: 1px solid #dee2e6; /* Bootstrapのデフォルトのボーダーカラー */
+  }

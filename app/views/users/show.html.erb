@@ -1,56 +1,92 @@
-HOME
-<h1>User info</h1>
-<table>
-  <tr>
-    <td><%= image_tag @user.get_profile_image(100, 100) %></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td><b>name</b></td>
-    <td><b><%= @user.name %></b></td>
-  </tr>
-  <tr>
-    <td><b>introduction</b></td>
-    <td><b><%= @user.introduction %></b></td>
-  </tr>
-</table>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>Home</title>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <% flash.each do |key, message| %>
+          <div class="flash <%= key %>">
+            <%= message %>
+          </div>
+        <% end %>
+        <h2>User info</h2>
+        <table>
+          <tr>
+            <td><%= image_tag @user.get_profile_image(100, 100) %></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><b>name</b></td>
+            <td><b><%= @user.name %></b></td>
+          </tr>
+          <tr>
+            <td><b>introduction</b></td>
+            <td><b><%= @user.introduction %></b></td>
+          </tr>
+        </table>
 
-<% if @user == current_user %>
-  <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
-<% end %>
+        <% if @user == current_user %>
+          <button type="button" class="btn btn-secondary">
+            <%= link_to raw("<i class='fas fa-user-cog'></i> "), edit_user_path(@user) %>
+          </button>
+        <% end %>
 
+        <h2>New book</h2>
+        <%= form_for @book, url: books_path, method: :post do |f| %>
+          <div class="mb-3">
+            <%= f.label :title, class: "form-label" %>
+            <%= f.text_field :title, class: "form-control" %>
+          </div>
 
+          <div class="mb-3">
+            <%= f.label :body, class: "form-label" %>
+            <%= f.text_area :body, class: "form-control", rows: 3 %>
+          </div>
 
-<h1>画像投稿フォーム</h1>
-<%= form_for @book, url: books_path, method: :post do |f| %>
-  <h4>画像</h4>
-  <%= f.file_field :image, accept: "image/*" %>
-  <h4>ショップ名</h4>
-  <%= f.text_field :title %>
-  <h4>説明</h4>
-  <%= f.text_area :body %>
-  <%= f.submit '投稿' %>
-<% end %>
+          <div>
+            <%= f.submit 'Create Book', class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
 
+      <div class="offset-md-1"></div>
 
+      <div class="col-md-8">
+        <h1>Books</h1>
+        <table>
+          <tr class="column">
+            <td></td>
+            <td><b>Title</b></td>
+            <td><b>Opinion</b></td>
+            <td></td>
+          </tr>
+          <% latest_book = @books.last %>
+          <tr>
+            <td><%= image_tag @user.get_profile_image(100, 100) %></td>
+            <td><%= link_to latest_book.title, book_path(latest_book.id) %></td>
+            <td><%= latest_book.body %></td>
+            <td>
+              <button type="button" class="btn btn-success">
+                <%= link_to 'Edit', edit_book_path(latest_book), class: 'text-white' %>
+              </button>
+              <button type="button" class="btn btn-danger">
+                <%= link_to 'Destroy', book_path(latest_book), method: :delete, class: 'text-white' %>
+              </button>
+            </td>
+          </tr>
+        </table>
 
-<h1>Book detail</h1>
-
-<table>
-  <% @books.each do |book| %>
-    <tr>
-      <td><%= book.user.name %></td>
-      <td><%= book.title %></td>
-      <td><%= book.body %></td>
-      <td>
-        <%= link_to "Destroy", book_path(book.id), method: :delete, data: { confirm: "Are you sure?" }, class: "destroy-link" %>
-      </td>
-      <td>
-        <%= link_to "Edit", edit_book_path(book.id), class: "edit-link" %>
-      </td>
-      <td>
-        <%= link_to "Show", book_path(book.id), class: "show-link" %>
-      </td>
-    </tr>
-  <% end %>
-</table>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

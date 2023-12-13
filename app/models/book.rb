@@ -1,6 +1,10 @@
 class Book < ApplicationRecord
   belongs_to :user
   
+ validates :title, presence: { message: "Custom title error message" }
+  validates :body, presence: { message: "Custom body error message" }, length: { maximum: 200 }
+
+  
    has_one_attached :image
    
   def get_image

@@ -1,9 +1,10 @@
- <%= form_with model: @book, url: book_path(@book.id), method: :patch do |f| %>
-    <h5>Title</h5>
+<h1>Editing Book</h1>
+<%= form_with model: @book, url: book_path(@book.id), method: :patch do |f| %>
+    <div>Title</div>
     <%= f.text_field :title %>
-
-    <h5>Body</h5>
+    <div>Opinion</div>
     <%= f.text_area :body %>
+  <%= f.submit "Update Book" %>
 
     <div class="migi">
       <%= link_to "Show", book_path(@book) %>|
