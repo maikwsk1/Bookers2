@@ -4,6 +4,11 @@
   <title>Top Page</title>
 </head>
 <body>
+     <% flash.each do |key, message| %>
+          <div class="flash <%= key %>">
+            <%= message %>
+          </div>
+        <% end %>
   <h1>welcome to <b>Bookers !!</b></h1>
   <h4>In Bookers,</h4>
   <p>you can share and exchange your opinions, impressions, and emotions</p>

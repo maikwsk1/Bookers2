@@ -14,67 +14,77 @@
    </head>
 
   <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Bookers2</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <% if user_signed_in? %>
-        <li class="nav-item">
-          <%= link_to user_path(current_user.id), class: 'nav-link' do %>
-            <i class="fas fa-home"></i> Home
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">Bookers2</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <!-- navbar 内のリンクを修正 -->
+          <% if user_signed_in? %>
+            <li class="nav-item">
+              <%= link_to user_path(current_user.id), class: 'nav-link' do %>
+                <i class="fas fa-home"></i> Home
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to users_path, class: 'nav-link' do %>
+                <i class="fas fa-users"></i> Users
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to books_path, class: 'nav-link' do %>
+                <i class="fas fa-book-open"></i> Books
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link' do %>
+                <i class="fas fa-sign-out-alt"></i> Log out
+              <% end %>
+            </li>
+            <!-- 以下は current_user の場合にのみ表示 -->
+            <li class="nav-item">
+              <% if current_user.id == params[:id] %>
+                <%= link_to edit_user_registration_path, class: 'nav-link' do %>
+                  <i class="fas fa-user-cog"></i> Edit Profile
+                <% end %>
+                <%= link_to 'Delete Account', registration_path(current_user), method: :delete, class: 'nav-link', data: { confirm: 'Are you sure?' } %>
+              <% end %>
+            </li>
+          <% else %>
+            <!-- ログインしていない場合のリンク -->
+            <li class="nav-item">
+              <%= link_to root_path, class: 'nav-link' do %>
+                <i class="fas fa-home"></i> Home
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to home_about_path, class: 'nav-link' do %>
+                <i class="fas fa-link"></i> About
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to new_user_registration_path, class: 'nav-link' do %>
+                <i class="fas fa-user-plus"></i> Sign up
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to new_user_session_path, class: 'nav-link' do %>
+                <i class="fas fa-sign-in-alt"></i> Log in
+              <% end %>
+            </li>
           <% end %>
-        </li>
-        <li class="nav-item">
-          <%= link_to users_path, class: 'nav-link' do %>
-            <i class="fas fa-users"></i> Users
-          <% end %>
-        </li>
-        <li class="nav-item">
-          <%= link_to books_path, class: 'nav-link' do %>
-            <i class="fas fa-book"></i> Books
-          <% end %>
-        </li>
-        <li class="nav-item">
-          <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link' do %>
-            <i class="fas fa-sign-out-alt"></i> Log out
-          <% end %>
-        </li>
-      <% else %>
-        <li class="nav-item">
-          <%= link_to root_path, class: 'nav-link' do %>
-            <i class="fas fa-home"></i> Home
-          <% end %>
-        </li>
-        <li class="nav-item">
-          <%= link_to home_about_path, class: 'nav-link' do %>
-            <i class="fas fa-link"></i> About
-          <% end %>
-        </li>
-        <li class="nav-item">
-          <%= link_to new_user_registration_path, class: 'nav-link' do %>
-            <i class="fas fa-user-plus"></i> Sign up
-          <% end %>
-        </li>
-        <li class="nav-item">
-          <%= link_to new_user_session_path, class: 'nav-link' do %>
-            <i class="fas fa-sign-in-alt"></i> Log in
-          <% end %>
-        </li>
-      <% end %>
-    </ul>
-  </div>
-</nav>
 
+       
 
+        </ul>
+      </div>
+    </nav>
 
     <%= yield %>
 
     <!-- Bootstrap JavaScriptの読み込み -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-  </body>
-</html>
+    <script src="https://stackpath.bootstrapcdn

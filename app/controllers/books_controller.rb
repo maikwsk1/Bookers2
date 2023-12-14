@@ -8,18 +8,22 @@ before_action :authenticate_user!
   end
   
   # 投稿データの保存
-  def create
-    @book = Book.new(book_params)
-    @book.user_id = current_user.id
+def create
+  @book = Book.new(book_params)
+  @book.user_id = current_user.id
 
-    if @book.save
-      redirect_to book_path(@book.id) # クリエイトが成功したら books/:id へリダイレクト
-    else
-     
-      render :new # クリエイトが失敗したら new ページを再表示
-    end
+  if @book.save
+      flash[:notice] = "Book was successfully updated."
+    redirect_to book_path(@book.id) # Redirect to the book's show page if successful
+  else
+    # Render the index page with the error messages
+    @books = Book.all
+    @user = User.first
+    
+    render :index
   end
-  
+end
+
   def index
     @book = Book.new 
     @books = Book.all  
@@ -36,6 +40,7 @@ before_action :authenticate_user!
     
      @newbook = Book.new 
      @user = @book.user
+     @books = @user.books
  end
  
  def destroy
@@ -55,8 +60,12 @@ before_action :authenticate_user!
   end
   
   def edit
-    @book = Book.find(params[:id])
+  @book = Book.find(params[:id])
+  if current_user != @book.user
+    flash[:alert] = "You don't have permission to edit this post."
+ redirect_to books_path(@user)
   end
+end
   
   # 投稿データのストロングパラメータ
   private
