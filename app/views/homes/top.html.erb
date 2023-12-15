@@ -1,9 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Top Page</title>
-</head>
-<body>
+
      <% flash.each do |key, message| %>
           <div class="flash <%= key %>">
             <%= message %>
@@ -13,13 +8,13 @@
   <h4>In Bookers,</h4>
   <p>you can share and exchange your opinions, impressions, and emotions</p>
   about various books!
-  <i class="fa-solid fa-book"></i>
+  <div>
+  <i class="fa-solid fa-book" ></i>
   <a href="<%= user_session_path %>">
     <button class="btn btn-info">Log in</button>
-  </a>
+  </a></div>
   <a href="<%= user_registration_path %>">
     <button class="btn btn-success">Sign up</button>
   </a>
   CopyRight Infratop.inc
-</body>
-</html>
+  

@@ -7,21 +7,21 @@
    
       <table>
         <tr>
-          <td><%= image_tag @user.get_profile_image(100, 100) %></td>
+          <td><%= image_tag current_user.get_profile_image(100, 100) %></td>
           <td></td>
         </tr>
         <tr>
           <td><b>name</b></td>
-          <td><b><%= @user.name %></b></td>
+          <td><b><%= current_user.name %></b></td>
         </tr>
         <tr>
           <td><b>introduction</b></td>
-          <td><b><%= @user.introduction %></b></td>
+          <td><b><%= current_user.introduction %></b></td>
         </tr>
       </table>
 
         <button type="button" class="btn btn-secondary">
-          <%= link_to raw("<i class='fas fa-user-cog'></i> "), edit_user_path(@user) %>
+          <%= link_to raw("<i class='fas fa-user-cog'></i> "), edit_user_path(current_user) %>
         </button>
     
 
