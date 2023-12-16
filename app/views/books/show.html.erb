@@ -7,17 +7,17 @@
         <%= value %>
       </div>
     <% end %>
-  <h1>User info</h1>
+ <h2>User info</h2>
 <table>
   <tr>
     <td><%= image_tag @book.user.get_profile_image(100, 100) %></td>
     <td></td>
   </tr>
-  <tr>
+  <tr class="table">
     <td><b>name</b></td>
     <td><b><%= @user.name %></b></td>
   </tr>
-  <tr>
+  <tr class="table">
     <td><b>introduction</b></td>
     <td><b><%= @user.introduction %></b></td>
   </tr>
@@ -25,18 +25,21 @@
 
 
 
-  <button type="button" class="btn btn-secondary">
-    <%= link_to raw("<i class='fas fa-user-cog'></i> "), edit_user_path(@user) %>
-  </button>
 
+<a href="<%= edit_user_path(@user) %>" class="btn btn-outline-secondary w-100"><i class='fas fa-user-cog'></i></a>
 
-
-<h1>New book</h1>
+  <h2>New book</h2>
 <%= form_for @newbook, url: books_path, method: :post do |f| %>
-  <div>Title</div>
-  <%= f.text_field :title, value: nil %>
-  <div>Opinion</div>
-  <%= f.text_area :body, value: nil %>
+          <div class="mb-3">
+            <%= f.label :title, class: "form-label" %>
+            <%= f.text_field :title, class: "form-control" %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :opinion, class: "form-label" %>
+            <%= f.text_area :body, class: "form-control", rows: 3 %>
+          </div>
+
 <div><%= f.button class: 'btn btn-success', type: 'submit' do %>
   Create Book</div>
 <% end %>
@@ -45,14 +48,13 @@
 </div>
 
 <div class="col-md-8 offset-md-1">
-<h1>Book detail</h1>
-<table>
- 
-
+<h2>Book detail</h2>
+<table class="table">
   <tr>
     <td>
       <%= link_to user_path(@book.user.id) do%> 
     <%= image_tag @user.get_profile_image(100, 100) %>
+     <%= link_to @user.name, user_path(@user) %>
   <% end %>
     </td>
     <td><%= link_to @book.title, book_path(@book) %></td>
@@ -61,17 +63,15 @@
   <% if @book.user == current_user %>
     <button type="button" class="btn btn-success">
       <%= link_to 'Edit', edit_book_path(@book), class: 'text-white' %>
-    </button>
-    <button type="button" class="btn btn-danger">
-      <%= link_to 'Destroy', book_path(@book), method: :delete, class: 'text-white', data: { confirm: 'Are you sure?' } %>
-    </button>
-  <% end %>
-</td>
+    </button></td>
 
+    <td><button type="button" class="btn btn-danger">
+      <%= link_to 'Destroy', book_path(@book), method: :delete, class: 'text-white', data: { confirm: 'Are you sure?' } %>
+    </button></td>
+  <% end %>
   </tr>
 </table>
-  
-   <div><%= link_to @user.name, user_path(@user) %></div>
+ 
 </div>
 </div>
 </div>

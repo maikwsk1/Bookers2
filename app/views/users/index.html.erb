@@ -1,46 +1,51 @@
-
 <div class="container">
   <div class="row">
     <div class="col-md-3">
-      <!-- Users -->
-      <h1>User info</h1>
-   
-      <table>
-        <tr>
-          <td><%= image_tag current_user.get_profile_image(100, 100) %></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td><b>name</b></td>
-          <td><b><%= current_user.name %></b></td>
-        </tr>
-        <tr>
-          <td><b>introduction</b></td>
-          <td><b><%= current_user.introduction %></b></td>
-        </tr>
-      </table>
+      <main>
+        <!-- Users -->
+        <h2>User info</h2>
+        <table>
+          <tr>
+            <td><%= image_tag current_user.get_profile_image(100, 100) %></td>
+            <td></td>
+          </tr>
+          <tr class="table">
+            <td><b>name</b></td>
+            <td><b><%= current_user.name %></b></td>
+          </tr>
+          <tr class="table">
+            <td><b>introduction</b></td>
+            <td><b><%= current_user.introduction %></b></td>
+          </tr>
+        </table>
 
-        <button type="button" class="btn btn-secondary">
-          <%= link_to raw("<i class='fas fa-user-cog'></i> "), edit_user_path(current_user) %>
-        </button>
-    
+        <a href="<%= edit_user_path(current_user) %>" class="btn btn-outline-secondary w-100">
+          <i class='fas fa-user-cog'></i>
+        </a>
 
-      <h1>New book</h1>
-      <%= form_for @book, url: books_path, method: :post do |f| %>
-        <div>Title</div>
-        <%= f.text_field :title %>
-        <div>Opinion</div>
-        <%= f.text_area :body %>
-        <div><%= f.submit 'Create Book' %></div>
+        <h2>New book</h2>
+        <%= form_for @book, url: books_path, method: :post do |f| %>
+          <div class="mb-3">
+            <%= f.label :title, class: "form-label" %>
+            <%= f.text_field :title, class: "form-control" %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :opinion, class: "form-label" %>
+            <%= f.text_area :body, class: "form-control", rows: 3 %>
+          </div>
+          
+          <button type="submit" class="btn btn-success">Create Book</button>
+        
       <% end %>
     </div>
 
- <div class="col-md-8 offset-md-1">
+    <div class="col-md-8 offset-md-1">
       <!-- Books -->
-      <h1>Books</h1>
+      <h2>Books</h2>
       <table class="table">
         <thead>
-          <tr>
+          <tr class="columnb">
             <th scope="col">Image</th>
             <th scope="col">Name</th>
             <th scope="col"></th>
@@ -57,8 +62,6 @@
         </tbody>
       </table>
     </div>
+  </main>
   </div>
 </div>
-
-
-

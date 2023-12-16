@@ -15,30 +15,13 @@
  *= require_tree .
  *= require_self
  */
-body{width: 100%;}
-
-
-
-
-
-.col-md-3 {margin-top: 30px;}
-
-.offset-md-1 { margin-left: 10px;}
-
-.col-md-8 {margin-top: 30px;}
-
-.column {
-    border-bottom: 1px solid #dee2e6; /* Bootstrapのデフォルトのボーダーカラー */
-  }
-.columnt{
-    border-top: 1px solid #dee2e6; /* Bootstrapのデフォルトのボーダーカラー */
-  }
-  .columnb {
-    border-bottom: 2px solid #dee2e6; /* Bootstrapのデフォルトのボーダーカラー */
-  }
-td {
-  margin-top: 20px;
-  margin-right: 50px;
-  margin-bottom: 20px;
-  margin-left: 50px;
+ 
+main{margin-top: 30px;
 }
+
+  .custom-btn {
+    color: white;
+  }
+
+
+h2{margin-top: 15px;}

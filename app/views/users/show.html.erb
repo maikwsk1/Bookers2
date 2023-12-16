@@ -13,24 +13,17 @@
             <td><%= image_tag @user.get_profile_image(100, 100) %></td>
             <td></td>
           </tr>
-          <tr class="columnt">
+          <tr class="table">
             <td><b>name</b></td>
             <td><b><%= @user.name %></b></td>
           </tr >
-          <tr class="columnt">
+          <tr class="table">
             <td><b>introduction</b></td>
             <td><b><%= @user.introduction %></b></td>
           </tr>
         </table>
 
-
-  <div class="d-grid gap-2 ">
-    <button type="button" class="btn btn-outline-secondary  w-100">
-      <%= link_to raw("<i class='fas fa-user-cog'></i> "), edit_user_path(@user) %>
-    </button>
-  </div>
-
-
+<a href="<%= edit_user_path(@user) %>" class="btn btn-outline-secondary w-100"><i class='fas fa-user-cog'></i></a>
 
         <h2>New book</h2>
         <%= form_for @book, url: books_path, method: :post do |f| %>
@@ -40,23 +33,23 @@
           </div>
 
           <div class="mb-3">
-            <%= f.label :body, class: "form-label" %>
+            <%= f.label :opinion, class: "form-label" %>
             <%= f.text_area :body, class: "form-control", rows: 3 %>
           </div>
 
           <div>
-            <%= f.submit 'Create Book', class: "btn btn-primary" %>
+            <%= f.submit 'Create Book', class: "btn btn-success" %>
           </div>
         <% end %>
       </div>
 
      <div class="col-md-8 offset-md-1">
         <h2 class="column">Books</h2>
-        <table>
+        <table class="table">
           <tr class="columnb">
-            <th></th>
-            <th>Title</th>
-            <th>Opinion</th>
+            <th scope="col"></th>
+            <th scope="col">Title</th>
+            <th scope="col">Opinion</th>
            
           </tr>
           <% @books.each do |book| %>
