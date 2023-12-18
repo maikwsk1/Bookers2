@@ -11,6 +11,8 @@ class User < ApplicationRecord
   has_one_attached :profile_image
 
   attribute :introduction, :text, default: ""
+  has_many :favorites, dependent: :destroy
+  has_many :book_comments, dependent: :destroy
 
   def get_profile_image(width, height)
     unless profile_image.attached?

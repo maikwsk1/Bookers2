@@ -11,49 +11,47 @@
     </ul>
   </div>
 <% end %>
-    <div class="col-md-3"><main>
+    <div class="col-md-3">
+<main>
       <h2>User info</h2>
       <table>
         <tr>
-          <td><%= image_tag @user.get_profile_image(100, 100) %></td>
+          <td><%= image_tag current_user.get_profile_image(100, 100) %></td>
           <td></td>
         </tr>
         <tr class="table">
           <td><b>name</b></td>
-          <td><b><%= @user.name %></b></td>
+          <td><b><%= current_user.name %></b></td>
         </tr>
         <tr class="table">
           <td><b>introduction</b></td>
-          <td><b><%= @user.introduction %></b></td>
+          <td><b><%= current_user.introduction %></b></td>
         </tr>
       </table>
 
-      <% if current_user == @user %>
- <a href="<%= edit_user_path(@user) %>" class="btn btn-outline-secondary w-100"><i class='fas fa-user-cog'></i></a>
-      <% else %>
-     <a href="<%= user_path(current_user) %>" class="btn btn-outline-secondary w-100"><i class='fas fa-user-cog'></i></a>
-      <% end %>
-      
+     <a href="<%= edit_user_path(current_user) %>" class="btn btn-outline-secondary w-100">
+          <i class='fas fa-user-cog'></i>
+        </a>
+
    
 
-      <h2>New book</h2>
-      <%= form_for @book, url: books_path, method: :post do |f| %>
-           <div class="mb-3">
-            <%= f.label :title, class: "form-label" %>
-            <%= f.text_field :title, class: "form-control" %>
-          </div>
+<h2>New book</h2>
+<%= form_with(model: @book, url: books_path, method: :post) do |f| %>
+  <div class="mb-3">
+    <%= f.label :title, class: "form-label" %>
+    <%= f.text_field :title, class: "form-control" %>
+  </div>
 
-          <div class="mb-3">
-            <%= f.label :opinion, class: "form-label" %>
-            <%= f.text_area :body, class: "form-control", rows: 3 %>
-          </div>
+  <div class="mb-3">
+    <%= f.label :opinion, class: "form-label" %>
+    <%= f.text_area :body, class: "form-control", rows: 3 %>
+  </div>
 
-          <div>
-                
-        <button type="submit" class="btn btn-success">Create Book</button>
-      </div>
-     
-      <% end %>
+  <div>
+    <button type="submit" class="btn btn-success">Create Book</button>
+  </div>
+<% end %>
+
     </div>
 
     <div class="col-md-8 offset-md-1">
@@ -73,9 +71,23 @@
             </td>
             <td><%= link_to book.title, book_path(book.id) %></td>
             <td><%= book.body %></td>
-          </tr>
+
+             <td>
+      <% if book.favorited_by?(current_user) %>
+        <%= link_to book_favorite_path(book), method: :delete do %>
+          ♥<%= book.favorites.count %> いいね
         <% end %>
-      </table>
+      <% else %>
+        <%= link_to book_favorite_path(book), method: :post do %>
+          ♡<%= book.favorites.count %> いいね
+        <% end %>
+      <% end %>
+    </td>
+
+<td><%= link_to "#{book.book_comments.count} コメント", book_path(book.id) %></td>
+</tr>
+<% end %>
+
     </div>
   </div>
 </div>

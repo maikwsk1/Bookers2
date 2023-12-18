@@ -8,27 +8,25 @@
 <div class="container center-block">
   <div class="row">
     <main class="col-md-6 offset-md-3">
-      <h1>Welcome to <b><i class="fa-solid fa-book"></i>Bookers !!</b></h1>
-      <p>In <b><i class="fa-solid fa-book"></i> Bookers,</b></p>
+      <h1>Welcome to <b><i class="fas fa-book"></i>Bookers !!</b></h1>
+      <p>In <b><i class="fas fa-book"></i>Bookers,</b></p>
       <p>you can share and exchange your opinions, impressions, and emotions</p>
       <p>about various books!</p>
 
-      <div class="actions">
-        <%= link_to user_session_path do %>
-          <button type="button" class="btn btn-info w-100 custom-btn">
-            Log in
-          </button>
-        <% end %>
-      </div>
+<div class="actions">
+  <button type="button" class="btn btn-primary w-100 custom-btn">
+    <%= link_to 'Log in', new_user_session_path, class: 'white-link' %>
+  </button>
+</div>
 
-      <div class="actions">
-        <%= link_to user_registration_path do %>
-          <button type="button" class="btn btn-success w-100 custom-btn">
-            Sign up
-          </button>
-        <% end %>
+<div class="actions">
+  <button type="button" class="btn btn-success w-100 custom-btn">
+    <%= link_to 'Sign up', user_registration_path, class: 'white-link' %>
+  </button>
+</div>
+
         <div class="copy1 text-center">CopyRight Infratop.inc</div>
-      </div>
+      
     </main>
   </div>
 </div>

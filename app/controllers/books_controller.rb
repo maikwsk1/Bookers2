@@ -32,6 +32,7 @@ end
 
  def show
     @book = Book.find_by(id: params[:id])
+    @book_comment = BookComment.new
 
     unless @book
       redirect_to books_path, alert: 'Book not found'
